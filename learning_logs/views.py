@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from .models import Topic as TopicModel
+from .models import Entry as EntryModel
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import TopicForm as TopicFormModel
-#new
 from .forms import EntryForm as EntryFormModel
 def index(request):
 	return render(request, 'learning_logs/index.html')
@@ -44,3 +44,17 @@ def new_entry(request,topic_id):
 
 	context = {'topic': topic, 'form': form}
 	return render(request, 'learning_logs/new_entry.html', context)
+def edit_entry(request,entry_id):
+	entry = EntryModel.objects.get(id=entry_id)
+	topic = entry.topic
+	
+	if request.method != 'POST':
+		form= EntryFormModel(instance=entry)
+	else:
+		form = EntryFormModel(instance=entry, data=request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('learning_logs:topic',args=[topic.id]))
+	context = {'entry':entry,'topic':topic,'form':form}
+	return render(request,'learning_logs/edit_entry.html',context)
+	
