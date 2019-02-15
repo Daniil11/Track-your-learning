@@ -1,10 +1,10 @@
 {% extends 'learning_logs/base.html' %}
 {% block content %}
 	<p>Тема: {{ topic }} </p>
-	<p>Содержание:</p>
+	<p>Записи</p>
 	<p>
 		<!-- here is mistake -->
-		<a href="{% url 'learning_logs:new_entry' topic.id %}">добавить содержание</a>
+		<a href="{% url 'learning_logs:new_entry' topic.id %}">добавить запись</a>
 	</p>
 	<ul>
 	  {% for entry in entries %}
@@ -12,12 +12,12 @@
 	<p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
 	<p>{{ entry.text|linebreaks }}</p>
 		<p>
-		  <a href="{% url 'learning_logs:edit_entry' entry.id %}">Редактировать описание</a>
+		  <a href="{% url 'learning_logs:edit_entry' entry.id %}">Редактировать запись</a>
 		</p>
 	</li>
 	{% empty %}
 	<li>
-	В этой теме пока нет содержания!
+	В этой теме пока нет записей!
 	</li>
 	{% endfor %}
 	</ul>
