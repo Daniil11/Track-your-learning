@@ -1,4 +1,15 @@
 {% extends "learning_logs/base.html" %}
+	{% block header %}
+	<div class='jumbotron'>
+ <h1 align="center">Track your learning</h1>
+ </div>
+{% endblock header %}
 {% block content %}
-<p>Веб приложение, помогающее вести учет того что вы выучили</p>
+	<h2>
+ <a href="{% url 'users:register' %}">Пройдите регистрацию</a> чтобы начать вести записи.
+ </h2>
+ <h2>
+Всякий раз, когда вы узнаете что-то новое о теме, сделайте запись
+ подводя итог тому, что вы узнали.
+ </h2>
 {% endblock content %}
