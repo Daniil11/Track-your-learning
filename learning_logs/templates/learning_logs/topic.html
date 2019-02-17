@@ -1,31 +1,31 @@
 {% extends 'learning_logs/base.html' %}
-	{% block header %}
-	{% load bootstrap3 %}
 
- <h2>{{ topic }}</h2>
+{% block header %}
+  <h2>{{ topic }}</h2>
 {% endblock header %}
+
 {% block content %}
-<p>
-{% buttons %}
-	<a href="{% url 'learning_logs:new_topic' %}" ><button class="btn btn-primary">Добавить запись</button></a>
-	{% endbuttons %}
-	</p>
-{% for entry in entries %}
-	<div class="panel panel-default">
-	<div class="panel-heading">
-	<h3>
- {{ entry.date_added|date:'M d, Y H:i' }}
-	<small>
- <a href="{% url 'learning_logs:edit_entry' entry.id %}">
- Редактировать</a>
- </small>
- </h3>
- </div>
-	<div class="panel-body">
- {{ entry.text|linebreaks }}
- </div>
- </div> <!-- panel -->
-{% empty %}
- Пока нет добавленных записей.
-{% endfor %}
+  <p>
+    <a href="{% url 'learning_logs:new_entry' topic.id %}"><button class="btn btn-primary">Добавить запись</button></a>
+  </p>
+
+  {% for entry in entries %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>
+          {{ entry.date_added|date:'M d, Y H:i' }}
+          <small>
+            <a href="{% url 'learning_logs:edit_entry' entry.id %}">
+              Редактировать</a>
+          </small>
+        </h3>
+      </div>
+      <div class="panel-body">
+        {{ entry.text|linebreaks }}
+      </div>
+    </div> <!-- panel -->
+  {% empty %}
+    Пока нет записей
+  {% endfor %}
+
 {% endblock content %}
