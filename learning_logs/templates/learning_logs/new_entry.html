@@ -1,11 +1,14 @@
 {% extends "learning_logs/base.html" %}
 {% block content %}
+{% load bootstrap3 %}
 	<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
-	<p>Введите новую запись </p>
+	<p><b>Введите новую запись </b></p>
 	<form action="{% url 'learning_logs:new_entry' topic.id %}" method='post'>
 	{% csrf_token %}
 	{{ form.as_p }}
-	<button name='submit'>Добавить</button>
+	{% buttons %}
+	<button name='submit' class="btn btn-primary">Добавить</button>
+	{% endbuttons %}
 	</form>
 
 {% endblock content %}
